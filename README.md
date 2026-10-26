@@ -42,12 +42,10 @@ Este repositorio contiene la implementación en **HTML5, CSS3 y JavaScript puro 
 
 ```text
 Vista-Mi-Parte/
-├── index.html        # Estructura semántica del formulario y modales
-├── css/
-│   └── estilos.css   # Estilos limpios y organizados (grid, flexbox, responsive)
-├── js/
-│   └── main.js       # Lógica de validación, subida de archivos y datos de ejemplo
-└── README.md         # Documentación de la entrega
+├── index.html        # Estructura HTML5, estilos CSS (<style>) y lógica JS (<script>) unificados en un solo archivo
+├── assets/
+│   └── preview.png   # Captura visual de la interfaz implementada
+└── README.md         # Documentación técnica de la entrega
 ```
 
 ---
