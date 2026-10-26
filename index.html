@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Completa el registro de Mi Negocio - Tienda Bolsillo</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- Contenedor Principal Centrado -->
+  <main class="contenedor-principal">
+
+    <!-- Mensaje de confirmación temporal -->
+    <div id="alerta-global" class="alerta-exito"></div>
+
+    <!-- Encabezado de la página -->
+    <header class="header-titulo">
+      <h1 class="titulo-principal">Completa el registro de Mi Negocio</h1>
+      <p class="subtitulo-ayuda">
+        Los campos con * son obligatorios. Guarda cada sección para continuar; los documentos permanecen en esta sesión.
+      </p>
+
+      <!-- Botones de ayuda superior -->
+      <div class="acciones-superiores">
+        <button type="button" class="btn-datos-ejemplo" onclick="completarDatosEjemplo()">
+          Completar con datos de ejemplo
+        </button>
+        <a href="javascript:void(0)" class="link-ver-estado" onclick="abrirModalEstado()">Ver estado</a>
+      </div>
+    </header>
+
+    <!-- Barra de Pestañas / Pasos del Onboarding -->
+    <nav class="tabs-navegacion" aria-label="Pasos de registro">
+      <div class="tab-item">1. Datos tributarios</div>
+      <div class="tab-item">2. Locales y horarios</div>
+      <div class="tab-item activo">3. Información bancaria</div>
+      <div class="tab-item">4. Vista previa y envío</div>
+    </nav>
+
+    <!-- Subtítulo descriptivo de la sección -->
+    <p class="texto-seccion">
+      Registra la cuenta bancaria principal del negocio. Puedes agregar cuentas adicionales de forma independiente.
+    </p>
+
+    <!-- Formulario de Información Bancaria -->
+    <form id="form-bancario">
+      <div class="formulario-grid">
+
+        <!-- Fila 1: Tipo de Institución y Nombre de la Institución -->
+        <div class="campo-grupo">
+          <label for="tipo-institucion">
+            Tipo de institución <span class="asterisco-rojo">*</span>
+          </label>
+          <select id="tipo-institucion" class="select-control" required>
+            <option value="Banco" selected>Banco</option>
+            <option value="Cooperativa">Cooperativa de Ahorro y Crédito</option>
+            <option value="Mutualista">Mutualista</option>
+          </select>
+        </div>
+
+        <div class="campo-grupo">
+          <label for="institucion-financiera">
+            Institución financiera <span class="asterisco-rojo">*</span>
+          </label>
+          <select id="institucion-financiera" class="select-control" required>
+            <option value="">Seleccione una entidad financiera...</option>
+            <option value="Banco Pichincha">Banco Pichincha</option>
+            <option value="Banco Guayaquil">Banco Guayaquil</option>
+            <option value="Produbanco">Produbanco (Grupo Promerica)</option>
+            <option value="Banco del Pacífico">Banco del Pacífico</option>
+            <option value="Banco Bolivariano">Banco Bolivariano</option>
+            <option value="Banco Internacional">Banco Internacional</option>
+            <option value="Banco del Austro">Banco del Austro</option>
+            <option value="Banco Solidario">Banco Solidario</option>
+            <option value="Cooperativa JEP">Cooperativa JEP</option>
+            <option value="Cooperativa Policía Nacional">Cooperativa Policía Nacional</option>
+          </select>
+          <span class="texto-nota">Catálogo de demostración.</span>
+        </div>
+
+        <!-- Fila 2: Tipo de Cuenta y Número de Cuenta -->
+        <div class="campo-grupo">
+          <label for="tipo-cuenta">
+            Tipo de cuenta <span class="asterisco-rojo">*</span>
+          </label>
+          <select id="tipo-cuenta" class="select-control" required>
+            <option value="Ahorro" selected>Ahorro</option>
+            <option value="Corriente">Corriente</option>
+          </select>
+        </div>
+
+        <div class="campo-grupo">
+          <label for="numero-cuenta">
+            Número de cuenta <span class="asterisco-rojo">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="numero-cuenta" 
+            class="input-control" 
+            placeholder="Ej: 2204567891" 
+            required
+          >
+        </div>
+
+        <!-- Fila 3: Nombre del Titular y Cédula -->
+        <div class="campo-grupo">
+          <label for="nombre-titular">
+            Nombre del titular <span class="asterisco-rojo">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="nombre-titular" 
+            class="input-control" 
+            placeholder="Nombres y apellidos completos" 
+            required
+          >
+        </div>
+
+        <div class="campo-grupo">
+          <label for="cedula-titular">
+            Cédula del titular <span class="asterisco-rojo">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="cedula-titular" 
+            class="input-control" 
+            placeholder="10 dígitos numéricos" 
+            maxlength="10" 
+            required
+          >
+        </div>
+
+        <!-- Fila 4: Correo electrónico opcional -->
+        <div class="campo-grupo">
+          <label for="correo-titular">
+            Correo electrónico (opcional)
+          </label>
+          <input 
+            type="email" 
+            id="correo-titular" 
+            class="input-control" 
+            placeholder="ejemplo@correo.com"
+          >
+        </div>
+
+        <div class="campo-grupo">
+          <!-- Espacio reservado para balance de cuadrícula -->
+        </div>
+
+        <!-- Fila 5: Cajas de Subida de Documentos (Selfie y Certificado) -->
+        <div class="campo-grupo">
+          <label>
+            Selfie del titular con documento <span class="asterisco-rojo">*</span>
+          </label>
+          <div id="caja-selfie" class="caja-subida">
+            <svg class="icono-subida" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            <div class="texto-subida-principal">Seleccionar imagen</div>
+            <div class="texto-subida-detalle">JPG o PNG · hasta 10 MB</div>
+            <div id="info-selfie" class="archivo-cargado-info"></div>
+          </div>
+          <input type="file" id="input-selfie" class="input-file-oculto" accept="image/png, image/jpeg">
+          <span class="texto-nota">Obligatorio en este formulario. Archivo local de demostración.</span>
+        </div>
+
+        <div class="campo-grupo">
+          <label>
+            Certificado bancario <span class="asterisco-rojo">*</span>
+          </label>
+          <div id="caja-certificado" class="caja-subida">
+            <svg class="icono-subida" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            <div class="texto-subida-principal">Seleccionar documento</div>
+            <div class="texto-subida-detalle">PDF, JPG o PNG · hasta 10 MB</div>
+            <div id="info-certificado" class="archivo-cargado-info"></div>
+          </div>
+          <input type="file" id="input-certificado" class="input-file-oculto" accept="application/pdf, image/png, image/jpeg">
+          <span class="texto-nota">Obligatorio en este formulario. Archivo local de demostración.</span>
+        </div>
+
+      </div>
+
+      <!-- Barra de Acciones Inferior -->
+      <div class="barra-acciones-inferior">
+        <button type="submit" class="btn-guardar-continuar">
+          Guardar cuenta principal y continuar
+        </button>
+
+        <div class="contenedor-adicionales">
+          <span id="contador-adicionales" class="label-cuentas-adicionales">Cuentas adicionales (0)</span>
+          <button type="button" class="btn-icono-agregar" onclick="abrirModalAgregarCuenta()" title="Agregar cuenta bancaria adicional">+</button>
+        </div>
+      </div>
+
+      <!-- Contenedor dinámico para listar cuentas adicionales si se agregan -->
+      <div id="lista-adicionales-container" class="lista-cuentas-guardadas" style="display: none;">
+        <h4 style="font-size: 13.5px; font-weight: 700; margin-bottom: 8px;">Cuentas bancarias adicionales registradas:</h4>
+        <div id="lista-cuentas"></div>
+      </div>
+    </form>
+
+  </main>
+
+  <!-- MODAL: Ver Estado del Registro -->
+  <div id="modal-estado" class="modal-fondo">
+    <div class="modal-caja">
+      <div class="modal-header">
+        <h3 class="modal-titulo">Estado del Registro</h3>
+        <button type="button" class="btn-cerrar-modal" onclick="cerrarModalEstado()">&times;</button>
+      </div>
+      <p style="font-size: 13px; color: #64748b;">Progreso actual de las secciones de registro:</p>
+      <ul class="lista-estados">
+        <li class="item-estado">
+          <span>1. Datos tributarios (RUC)</span>
+          <span class="badge-estado badge-completado">Completado</span>
+        </li>
+        <li class="item-estado">
+          <span>2. Locales y horarios</span>
+          <span class="badge-estado badge-completado">Completado</span>
+        </li>
+        <li class="item-estado">
+          <span>3. Información bancaria</span>
+          <span class="badge-estado badge-progreso">En progreso</span>
+        </li>
+        <li class="item-estado">
+          <span>4. Vista previa y envío</span>
+          <span class="badge-estado badge-pendiente">Pendiente</span>
+        </li>
+      </ul>
+      <div style="text-align: right; margin-top: 14px;">
+        <button type="button" class="btn-datos-ejemplo" onclick="cerrarModalEstado()">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Agregar Cuenta Adicional -->
+  <div id="modal-cuenta-extra" class="modal-fondo">
+    <div class="modal-caja">
+      <div class="modal-header">
+        <h3 class="modal-titulo">Agregar Cuenta Bancaria Adicional</h3>
+        <button type="button" class="btn-cerrar-modal" onclick="cerrarModalAgregarCuenta()">&times;</button>
+      </div>
+      <form id="form-cuenta-extra">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div>
+            <label style="font-size: 12.5px; font-weight: 600;">Banco / Cooperativa *</label>
+            <input type="text" id="extra-banco" class="input-control" placeholder="Ej: Banco Guayaquil" required>
+          </div>
+          <div>
+            <label style="font-size: 12.5px; font-weight: 600;">Tipo de cuenta *</label>
+            <select id="extra-tipo" class="select-control" required>
+              <option value="Ahorro">Ahorro</option>
+              <option value="Corriente">Corriente</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 12.5px; font-weight: 600;">Número de cuenta *</label>
+            <input type="text" id="extra-numero" class="input-control" placeholder="Ej: 1102938475" required>
+          </div>
+          <div>
+            <label style="font-size: 12.5px; font-weight: 600;">Nombre del titular *</label>
+            <input type="text" id="extra-titular" class="input-control" placeholder="Nombre completo" required>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+          <button type="button" class="btn-datos-ejemplo" onclick="cerrarModalAgregarCuenta()">Cancelar</button>
+          <button type="submit" class="btn-guardar-continuar" style="padding: 8px 16px;">Agregar cuenta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script principal -->
+  <script src="js/main.js"></script>
+</body>
+</html>
